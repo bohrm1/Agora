@@ -37,7 +37,7 @@ class UDPServer {
     if (kDebugPrintUdpServerInit) {
       std::printf("Creating UDP server listening at port %d\n", port);
     }
-    sock_fd_ = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK,
+    sock_fd_ = socket(AF_INET6, SOCK_DGRAM | SOCK_NONBLOCK,  //changed to IPv6
                       IPPROTO_UDP);  //AF_NET,  do we have to change to AF_NET6
     if (sock_fd_ == -1) {
       throw std::runtime_error("UDPServer: Failed to create local socket.");
@@ -47,8 +47,8 @@ class UDPServer {
 
     // Set buffer size
     if (rx_buffer_size != 0) {
-      const unsigned int desired_buf_size =
-          static_cast<unsigned int>(rx_buffer_size);
+      const unsigned int desired_buf_size static_cast<unsigned int>(
+          rx_buffer_size);
       unsigned int actual_buf_size;
       socklen_t actual_buf_storage_size = sizeof(actual_buf_size);
 
@@ -79,7 +79,7 @@ class UDPServer {
     }
 
     struct sockaddr_in serveraddr;
-    serveraddr.sin_family = AF_INET;
+    serveraddr.sin_family = AF_INET6;  //changed to IPv6
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
     serveraddr.sin_port = htons(static_cast<unsigned short>(port));
     std::memset(serveraddr.sin_zero, 0u, sizeof(serveraddr.sin_zero));
@@ -156,7 +156,7 @@ class UDPServer {
 
       struct addrinfo hints;
       std::memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
+      hints.ai_family = AF_INET6;  //changed to IPv6
       hints.ai_socktype = SOCK_DGRAM;
       hints.ai_protocol = IPPROTO_UDP;
 
