@@ -37,7 +37,8 @@ class UDPServer {
     if (kDebugPrintUdpServerInit) {
       std::printf("Creating UDP server listening at port %d\n", port);
     }
-    sock_fd_ = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, IPPROTO_UDP);
+    sock_fd_ = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK,
+                      IPPROTO_UDP);  //AF_NET,  do we have to change to AF_NET6
     if (sock_fd_ == -1) {
       throw std::runtime_error("UDPServer: Failed to create local socket.");
     }

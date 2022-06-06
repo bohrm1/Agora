@@ -85,7 +85,7 @@ class UDPClient {
 
       struct addrinfo hints;
       std::memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
+      hints.ai_family = AF_INET;  //change to AF_NET
       hints.ai_socktype = SOCK_DGRAM;
       hints.ai_protocol = IPPROTO_UDP;
 
