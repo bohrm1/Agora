@@ -78,14 +78,14 @@ class UDPServer {
       }
     }
 
-    struct sockaddr_in serveraddr;
-    serveraddr.sin_family = AF_INET6;  //changed to IPv6
-    serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serveraddr.sin_port = htons(static_cast<unsigned short>(port));
-    std::memset(serveraddr.sin_zero, 0u, sizeof(serveraddr.sin_zero));
+    struct sockaddr_in6 serveraddr6;     //changed to IPv6
+    serveraddr6.sin6_family = AF_INET6;  //changed to IPv6
+    serveraddr6.sin6_addr.s_addr = htonl(INADDR_ANY);
+    serveraddr6.sin6_port = htons(static_cast<unsigned short>(port));
+    std::memset(serveraddr6.sin6_zero, 0u, sizeof(serveraddr6.sin6_zero));
 
-    ret = bind(sock_fd_, reinterpret_cast<struct sockaddr*>(&serveraddr),
-               sizeof(serveraddr));
+    ret = bind(sock_fd_, reinterpret_cast<struct sockaddr*>(&serveraddr6),
+               sizeof(serveraddr6));
     if (ret != 0) {
       throw std::runtime_error("UDPServer: Failed to bind socket to port " +
                                std::to_string(port) +
