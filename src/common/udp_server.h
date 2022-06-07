@@ -47,8 +47,8 @@ class UDPServer {
 
     // Set buffer size
     if (rx_buffer_size != 0) {
-      const unsigned int desired_buf_size static_cast<unsigned int>(
-          rx_buffer_size);
+      const unsigned int desired_buf_size =
+          static_cast<unsigned int>(rx_buffer_size);
       unsigned int actual_buf_size;
       socklen_t actual_buf_storage_size = sizeof(actual_buf_size);
 
